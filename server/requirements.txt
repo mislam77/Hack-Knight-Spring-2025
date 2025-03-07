@@ -1,0 +1,7 @@
+Flask
+flask-cors
+opencv-python
+opencv-contrib-python
+pyyaml
+pillow
+firebase-admin
