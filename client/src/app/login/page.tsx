@@ -1,51 +1,31 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import invisLogo from "../assets/invis-Image.png";
 
-// Create a component without SSR for the content that might cause hydration issues
-const LoginContent = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [mounted, setMounted] = useState(false);
-  const [imageSrc, setImageSrc] = useState(null);
-
-  useEffect(() => {
-    setMounted(true);
-    import("../assets/invis-Image.png")
-      .then((image) => {
-        setImageSrc(image.default);
-      })
-      .catch((err) => {
-        console.error("Failed to load image:", err);
-      });
-  }, []);
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login attempt with:', { email, password });
+    console.log("Login attempt with:", { email, password });
   };
-
-  if (!mounted) {
-    return <div className="min-h-screen flex items-center justify-center bg-gray-50">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="flex justify-center">
-          {imageSrc && (
-            <Image 
-              src={imageSrc} 
-              alt="Invis logo" 
-              className="object-contain mix-blend-multiply brightness-105 contrast-110 saturate-150" 
-              width={200} 
-              height={100}
-              priority
-            />
-          )}
+          <Image 
+            src={invisLogo} 
+            alt="Invis logo" 
+            className="object-contain mix-blend-multiply brightness-105 contrast-110 saturate-150" 
+            width={200} 
+            height={100}
+            priority
+          />
         </div>
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -121,14 +101,28 @@ const LoginContent = () => {
               Sign in
             </button>
           </div>
+
+          <div className="flex items-center my-4">
+            <div className="flex-1 border-t border-gray-300"></div>
+            <span className="px-3 text-sm text-gray-500">or</span>
+            <div className="flex-1 border-t border-gray-300"></div>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#103f62] hover:bg-[#155c8e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg className="h-5 w-5 text-[#75baea] group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M10 2a8 8 0 1 1-8 8 8 8 0 0 1 8-8zm0 14a6 6 0 1 0-6-6 6 6 0 0 0 6 6zm-2-6a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm-2.5 0a4.5 4.5 0 0 1 9 0h-1a3.5 3.5 0 0 0-7 0h-1z" />
+                </svg>
+              </span>
+              Sign in with Face Authentication
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
-};
-
-const LoginPage = dynamic(() => Promise.resolve(LoginContent), { ssr: false });
-
-export default function Page() {
-  return <LoginPage />;
 }
