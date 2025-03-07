@@ -12,15 +12,15 @@ export default function Hero() {
             <h1 className="text-7xl font-bold tracking-tighter bg-gradient-to-b from-[#1e8fde] to-[#103f62] text-transparent bg-clip-text mt-6">
               Pay anywhere effortlessly
             </h1>
-            <p className="text-lg tracking-tight mt-6">
+            <p className="text-[20px] leading-[30px] tracking-tight text-[#010D3E] mt-5">
               Unlock seamless, contactless payments with our facial recognition
               technology.
             </p>
-            <div className="flex gap-3 items-center mt-[30px]">
-              <Button className="px-6 py-4 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight hover:cursor-pointer">
+            <div className="flex gap-3 items-center mt-8">
+              <Button className="px-5 py-4 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight hover:cursor-pointer">
                 Join now
               </Button>
-              <Button className="px-6 py-4 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-transparent text-black hover:bg-transparent hover:cursor-pointer">
+              <Button className="px-5 py-4 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-transparent text-black hover:bg-transparent hover:cursor-pointer">
                 Learn more
               </Button>
             </div>
