@@ -3,35 +3,31 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { StaticImageData } from 'next/image';
 import dynamic from 'next/dynamic';
 
 // Create a component without SSR for the content that might cause hydration issues
 const LoginContent = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [mounted, setMounted] = useState<boolean>(false);
-  const [imageSrc, setImageSrc] = useState<StaticImageData | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [mounted, setMounted] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
-    // Set mounted state to true when component mounts
     setMounted(true);
-    
-    // Dynamically import the image after component is mounted
-    import("../assets/invis-Image.png").then((image) => {
-      setImageSrc(image.default);
-    }).catch(err => {
-      console.error("Failed to load image:", err);
-    });
+    import("../assets/invis-Image.png")
+      .then((image) => {
+        setImageSrc(image.default);
+      })
+      .catch((err) => {
+        console.error("Failed to load image:", err);
+      });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login attempt with:', { email, password });
-    // Frontend only for now
   };
 
-  // Don't render anything until client-side hydration is complete
   if (!mounted) {
     return <div className="min-h-screen flex items-center justify-center bg-gray-50">Loading...</div>;
   }
@@ -51,7 +47,6 @@ const LoginContent = () => {
             />
           )}
         </div>
-        
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
@@ -67,9 +62,7 @@ const LoginContent = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
+              <label htmlFor="email" className="sr-only">Email address</label>
               <input
                 id="email"
                 name="email"
@@ -82,11 +75,8 @@ const LoginContent = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            
             <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
+              <label htmlFor="password" className="sr-only">Password</label>
               <input
                 id="password"
                 name="password"
@@ -100,7 +90,6 @@ const LoginContent = () => {
               />
             </div>
           </div>
-
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
@@ -113,37 +102,23 @@ const LoginContent = () => {
                 Remember me
               </label>
             </div>
-
             <div className="text-sm">
               <Link href="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Forgot your password?
               </Link>
             </div>
           </div>
-
           <div>
-          
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#103f62] hover:bg-[#155c8e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg className="h-5 w-5 text-[#75baea] group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2-2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
               </span>
               Sign in
-            </button>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#75baea] hover:bg-[#218fde] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                </svg>
-              </span>
-              Face recognicion
             </button>
           </div>
         </form>
@@ -152,7 +127,6 @@ const LoginContent = () => {
   );
 };
 
-// Use dynamic import with SSR disabled for the main component
 const LoginPage = dynamic(() => Promise.resolve(LoginContent), { ssr: false });
 
 export default function Page() {
