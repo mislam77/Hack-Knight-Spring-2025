@@ -14,13 +14,13 @@ const config: Config = {
       lg: "1200px",
     },
     extend: {
-      // container: {
-      //   center: true,
-      //   padding: {
-      //     DEFAULT: "20px",
-      //     lg: "80px",
-      //   },
-      // },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "20px",
+          lg: "80px",
+        },
+      },
     },
   },
   plugins: [],

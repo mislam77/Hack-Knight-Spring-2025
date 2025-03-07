@@ -5,6 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 @tailwind base;
 @tailwind layer;
+@tailwind components;
 @tailwind utilities;
 
 /* :root {
@@ -250,7 +251,7 @@ body {
 }
 
 @layer components {
-  .container {
-    @apply max-w-[708px] mx-auto;
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium text-xl inline-flex items-center justify-center tracking-tight;
   }
 }
