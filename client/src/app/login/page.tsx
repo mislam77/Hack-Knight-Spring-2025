@@ -1,21 +1,57 @@
-// pages/login.js
 "use client";
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { StaticImageData } from 'next/image';
+import dynamic from 'next/dynamic';
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+// Create a component without SSR for the content that might cause hydration issues
+const LoginContent = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [imageSrc, setImageSrc] = useState<StaticImageData | null>(null);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    // Set mounted state to true when component mounts
+    setMounted(true);
+    
+    // Dynamically import the image after component is mounted
+    import("../assets/invis-Image.png").then((image) => {
+      setImageSrc(image.default);
+    }).catch(err => {
+      console.error("Failed to load image:", err);
+    });
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Login attempt with:', { email, password });
     // Frontend only for now
   };
 
+  // Don't render anything until client-side hydration is complete
+  if (!mounted) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50">Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        <div className="flex justify-center">
+          {imageSrc && (
+            <Image 
+              src={imageSrc} 
+              alt="Invis logo" 
+              className="object-contain mix-blend-multiply brightness-105 contrast-110 saturate-150" 
+              width={200} 
+              height={100}
+              priority
+            />
+          )}
+        </div>
+        
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Sign in to your account
@@ -86,20 +122,39 @@ export default function LoginPage() {
           </div>
 
           <div>
+          
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#103f62] hover:bg-[#155c8e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg className="h-5 w-5 text-[#75baea] group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+              Sign in
+            </button>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#75baea] hover:bg-[#218fde] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
               </span>
-              Sign in
+              Face recognicion
             </button>
           </div>
         </form>
       </div>
     </div>
   );
+};
+
+// Use dynamic import with SSR disabled for the main component
+const LoginPage = dynamic(() => Promise.resolve(LoginContent), { ssr: false });
+
+export default function Page() {
+  return <LoginPage />;
 }
