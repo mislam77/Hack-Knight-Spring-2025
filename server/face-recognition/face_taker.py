@@ -13,6 +13,7 @@ from settings import CAMERA, FACE_DETECTION, TRAINING, PATHS
 import firebase_admin
 from firebase_admin import credentials, storage, firestore
 import hashlib
+import concurrent.futures
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -128,42 +129,45 @@ if __name__ == '__main__':
 
         count = 0
         face_image_urls = []
-        while count < TRAINING['samples_needed']:
-            ret, img = cam.read()
-            if not ret:
-                logger.warning("Failed to grab frame")
-                continue
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = []
+            while count < TRAINING['samples_needed']:
+                ret, img = cam.read()
+                if not ret:
+                    logger.warning("Failed to grab frame")
+                    continue
                 
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(
-                gray,
-                scaleFactor=FACE_DETECTION['scale_factor'],
-                minNeighbors=FACE_DETECTION['min_neighbors'],
-                minSize=FACE_DETECTION['min_size']
-            )
-            
-            for (x, y, w, h) in faces:
-                if count < TRAINING['samples_needed']:
-                    # Extract face region and convert to JPEG bytes
-                    face_img = gray[y:y+h, x:x+w]
-                    _, img_encoded = cv2.imencode('.jpg', face_img)
-                    image_data = img_encoded.tobytes()
-                    
-                    # Upload directly to Firebase
-                    public_url = upload_to_firebase_storage(image_data, str(numeric_id), count+1)
-                    logger.info(f"Uploaded image {count+1} to {public_url}")
-
-                    # Collect URLs
-                    # face_image_urls.append(public_url)
-                    
-                    count += 1
-
-            # Exit on ESC key
-            if cv2.waitKey(100) & 0xff == 27:
-                break
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                faces = face_cascade.detectMultiScale(
+                    gray,
+                    scaleFactor=FACE_DETECTION['scale_factor'],
+                    minNeighbors=FACE_DETECTION['min_neighbors'],
+                    minSize=FACE_DETECTION['min_size']
+                )
                 
-        # Update Firestore with all faceImageUrls
-        # update_firestore_user(str(face_id), face_image_urls)
+                for (x, y, w, h) in faces:
+                    if count < TRAINING['samples_needed']:
+                        # Extract face region and convert to JPEG bytes
+                        face_img = gray[y:y+h, x:x+w]
+                        _, img_encoded = cv2.imencode('.jpg', face_img)
+                        image_data = img_encoded.tobytes()
+                        
+                        # Upload directly to Firebase asynchronously
+                        future = executor.submit(upload_to_firebase_storage, image_data, str(numeric_id), count+1)
+                        futures.append(future)
+                        count += 1
+
+                # Exit on ESC key
+                if cv2.waitKey(100) & 0xff == 27:
+                    break
+
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    public_url = future.result()
+                    logger.info(f"Uploaded image to {public_url}")
+                except Exception as e:
+                    logger.error(f"Error uploading image: {e}")
+                
         logger.info(f"Successfully captured {count} images")
 
     except Exception as e:
