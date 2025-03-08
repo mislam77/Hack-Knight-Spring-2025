@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 
 export default function CallToAction() {
   return (
-    <section className="py-25 bg-gradient-to-t from-[#dcf5fc] to-[#fff]">
+    <section className="pt-25 pb-20 bg-gradient-to-t from-[#dcf5fc] to-[#fff]">
       <div>
         {/* <div className="max-w-[540px] mx-auto">
           <h2 className="text-center text-[54px] leading-[60px] font-bold tracking-tighter text-[#1F2937] mt-5">

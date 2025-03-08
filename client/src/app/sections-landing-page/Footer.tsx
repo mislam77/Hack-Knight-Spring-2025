@@ -5,7 +5,7 @@ import { Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-black pt-8 pb-10 text-center text-white/65">
+    <footer className="bg-black py-8 text-center text-white/65">
       <div className="max-w-[428px] mx-auto">
         <div className="flex justify-center">
           <Image src={InvisLogo} alt="Invis logo" height={80} className="" />
