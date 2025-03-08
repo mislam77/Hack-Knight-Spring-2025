@@ -53,7 +53,7 @@ export default function CallToAction() {
                   <Input type="email" placeholder="Enter your email" />
                 </div>
               </div>
-              <Button className="text-center w-full bg-[#1895ff] hover:bg-[#41a5fa] hover:cursor-pointer mt-8">
+              <Button className="text-center w-full btn-color hover:cursor-pointer mt-8">
                 Subscribe
               </Button>
             </div>
