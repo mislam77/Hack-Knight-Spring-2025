@@ -28,14 +28,8 @@ const SignupPage = () => {
       );
       const user = userCredential.user;
       await createUser(user.uid, firstName, lastName, email, phoneNumber);
-      console.log("Signup successful:", {
-        email,
-        password,
-        firstName,
-        lastName,
-        phoneNumber,
-      });
-      router.push("/login");
+      console.log('Signup successful:', { email, password, firstName, lastName, phoneNumber });
+      router.push(`/face-auth-signup?userId=${user.uid}`);
     } catch (error) {
       console.error("Error during signup:", error);
     }

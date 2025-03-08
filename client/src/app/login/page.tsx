@@ -29,6 +29,10 @@ export default function LoginPage() {
     }
   };
 
+  const handleFaceAuth = () => {
+    router.push('/face-auth-login');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -146,7 +150,8 @@ export default function LoginPage() {
           <div>
             <button
               type="button"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-[#103f62] hover:bg-[#155c8e] hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#103f62] hover:bg-[#155c8e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={handleFaceAuth}
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg
