@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="pt-10 pb-18 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,_#dcf5fc_50%,_#fff_100%)] overflow-x-clip">
+    <section className="pt-10 pb-25 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,_#dcf5fc_50%,_#fff_100%)] overflow-x-clip">
       <div className="container mx-auto px-20">
         <div className="flex items-center justify-center">
           <div className="w-[478px] z-10">
