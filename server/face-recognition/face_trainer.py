@@ -97,12 +97,12 @@ def get_images_and_labels(user_id: str):
         logger.error(f"Error processing images: {e}")
         raise
 
-# def upload_model_to_firebase_storage(model_path: str, user_id: str) -> str:
-#     """Uploads the trained model to Firebase Storage"""
-#     bucket = storage.bucket()
-#     blob = bucket.blob(f'face_model/trainer.yml')
-#     blob.upload_from_filename(model_path)
-#     return blob.public_url
+def upload_model_to_firebase_storage(model_path: str, user_id: str) -> str:
+    """Uploads the trained model to Firebase Storage"""
+    bucket = storage.bucket()
+    blob = bucket.blob(f'face_model/trainer.yml')
+    blob.upload_from_filename(model_path)
+    return blob.public_url
 
 if __name__ == "__main__":
     import sys
@@ -135,8 +135,13 @@ if __name__ == "__main__":
         logger.info(f"Model trained with {len(np.unique(ids))} faces")
 
         # Upload the model to Firebase Storage
-        # model_url = upload_model_to_firebase_storage(local_model_path, user_id)
-        # logger.info(f"Model uploaded to {model_url}")
+        model_url = upload_model_to_firebase_storage(local_model_path, user_id)
+        logger.info(f"Model uploaded to {model_url}")
+
+        # Delete the local model file
+        if os.path.exists(local_model_path):
+            os.remove(local_model_path)
+            logger.info(f"Deleted local model file {local_model_path}")
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")

@@ -21,12 +21,12 @@ firebase_admin.initialize_app(cred, {'storageBucket': 'cardless-pay-861d9.fireba
 # Initialize Firestore
 db = firestore.client()
 
-# def download_trainer_file():
-#     bucket = storage.bucket()
-#     blob = bucket.blob('face_model/trainer.yml')
-#     local_trainer_path = PATHS['trainer_file']
-#     blob.download_to_filename(local_trainer_path)
-#     return local_trainer_path
+def download_trainer_file():
+    bucket = storage.bucket()
+    blob = bucket.blob('face_model/trainer.yml')
+    local_trainer_path = PATHS['trainer_file']
+    blob.download_to_filename(local_trainer_path)
+    return local_trainer_path
 
 def get_user_id_from_firestore(face_id: int) -> str:
     users_ref = db.collection('users')
@@ -40,16 +40,12 @@ if __name__ == "__main__":
         logger.info("Starting face recognition system...")
 
         # Download trainer file from Firebase Storage
-        # trainer_file_path = download_trainer_file()
+        trainer_file_path = download_trainer_file()
         
         # Initialize face recognizer
         recognizer = cv2.face.LBPHFaceRecognizer_create()
-        # recognizer.read(trainer_file_path)
+        recognizer.read(trainer_file_path)
 
-        if not os.path.exists(PATHS['trainer_file']):
-            raise ValueError("Trainer file not found. Please train the model first.")
-        recognizer.read(PATHS['trainer_file'])
-        
         # Load face cascade classifier
         face_cascade = cv2.CascadeClassifier(PATHS['cascade_file'])
         if face_cascade.empty():
@@ -105,3 +101,6 @@ if __name__ == "__main__":
         if 'cam' in locals():
             cam.release()
         cv2.destroyAllWindows()
+        if os.path.exists(trainer_file_path):
+            os.remove(trainer_file_path)
+            logger.info(f"Deleted local trainer file {trainer_file_path}")
