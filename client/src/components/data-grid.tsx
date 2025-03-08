@@ -57,8 +57,8 @@ export const DataGrid = () => {
     const newestDate = new Date(Math.max(...dates.map(date => date.getTime())));
 
     return (
-        <div>
-            <DataCard
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-2 mb-8">
+            <DataCard 
                 title="Total Spending"
                 value={totalSpending}
                 icon={FaPiggyBank}
