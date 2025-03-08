@@ -117,11 +117,7 @@ export default function LoginPage() {
             </div>
           </div>
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-[#103f62] hover:bg-[#155c8e] hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={handleSubmit}
-            >
+            <button type="submit" className="sign-btn" onClick={handleSubmit}>
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg
                   className="h-5 w-5 text-gray-300 group-hover:text-white"
