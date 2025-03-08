@@ -19,6 +19,11 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!firstName || !lastName || !phoneNumber || !email || !password) {
+      alert("Please fill out all required fields.");
+      return;
+    }
     const auth = getAuth();
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -28,7 +33,13 @@ const SignupPage = () => {
       );
       const user = userCredential.user;
       await createUser(user.uid, firstName, lastName, email, phoneNumber);
-      console.log('Signup successful:', { email, password, firstName, lastName, phoneNumber });
+      console.log("Signup successful:", {
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+      });
       router.push(`/face-auth-signup?userId=${user.uid}`);
     } catch (error) {
       console.error("Error during signup:", error);
@@ -36,17 +47,14 @@ const SignupPage = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>Sign Up</title>
-      </Head>
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+    <section className="pt-3 pb-6 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="max-w-md w-full space-y-2">
           <div className="flex justify-center">
             <Image
               src={invisLogo}
               alt="Invis logo"
-              className="object-contain mix-blend-multiply brightness-105 contrast-110 saturate-150"
+              className="object-contain mix-blend-multiply logo-color"
               width={100}
               height={50}
               priority
@@ -182,7 +190,7 @@ const SignupPage = () => {
               </div>
             </div>
             <div>
-              <button type="submit" className="sign-btn">
+              <button type="submit" className="sign-btn" onClick={handleSubmit}>
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <svg
                     className="h-5 w-5 text</span>-[#75baea] group-hover:text-indigo-400"
@@ -204,7 +212,7 @@ const SignupPage = () => {
           </form>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

@@ -50,7 +50,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="pt-6 pb-5">
+      <div className="pt-6 pb-4">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex justify-between">
             <div className="max-w-[300px] relative hover:cursor-pointer">
@@ -59,12 +59,12 @@ export default function Header() {
                   src={InvisLogoTransparent}
                   alt="Invis.io logo"
                   width={70}
-                  className="h-auto"
+                  className="h-auto logo-color"
                 />
                 <Image
                   src={InvistLogoText}
                   alt="Invis.io text"
-                  className="w-full h-auto absolute -right-15 bottom-5"
+                  className="w-full h-auto absolute -right-15 bottom-5 logo-color"
                 />
               </a>
             </div>
