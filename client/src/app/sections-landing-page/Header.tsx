@@ -17,7 +17,7 @@ export default function Header() {
   // };
 
   return (
-    <header className="sticky top-0 z-20 backdrop-blur-sm">
+    <header className="sticky top-0 bg-white z-20">
       <div
         className={twMerge(
           "bg-black text-white text-sm flex justify-center items-center gap-3 py-3",
@@ -48,7 +48,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="pt-10 pb-5">
+      <div className="pt-7 pb-5">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex justify-between">
             <Image
@@ -68,9 +68,11 @@ export default function Header() {
               <a href="#" className="hover:text-[#41a5fa]">
                 Updates
               </a>
-              <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer bg-[#1895ff] hover:bg-[#41a5fa]">
-                <Link href="/login">Sign in</Link>
-              </Button>
+              <Link href="/login">
+                <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer bg-[#1895ff] hover:bg-[#41a5fa]">
+                  Sign in
+                </Button>
+              </Link>
             </nav>
           </div>
         </div>
