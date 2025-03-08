@@ -1,1 +1,7 @@
+# Virtual environment
 .venv/
+
+.env
+
+face-recognition/firebase/firebase_auth.json
+face-recognition/firebase/firebase_config.py
