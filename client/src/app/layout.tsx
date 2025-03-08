@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative">
-      <body className={clsx(dmSans.className, "antialiased bg-red")}>
+      <body className={clsx(dmSans.className, "antialiased bg-white")}>
         {children}
       </body>
     </html>
