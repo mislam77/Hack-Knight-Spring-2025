@@ -3,15 +3,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH } from '../../../firebase/clientApp';
 import invisLogo from "../assets/invis-Image.png";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login attempt with:", { email, password });
+    try {
+      const userCredential = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      const user = userCredential.user;
+      console.log("Login successful:", { email, userId: user.uid });
+      router.push('/');
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
 
   return (
@@ -92,6 +103,7 @@ export default function LoginPage() {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#103f62] hover:bg-[#155c8e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={handleSubmit}
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg className="h-5 w-5 text-[#75baea] group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
