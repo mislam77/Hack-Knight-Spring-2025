@@ -11,10 +11,18 @@ export default function Footer() {
           <Image src={InvisLogo} alt="Invis logo" height={80} className="" />
         </div>
         <nav className="flex flex-row gap-6 mt-6 justify-center">
-          <a href="#">About</a>
-          <a href="#">Features</a>
-          <a href="#">Help</a>
-          <a href="#">Careers</a>
+          <a href="#" className="hover:text-white">
+            About
+          </a>
+          <a href="#" className="hover:text-white">
+            Features
+          </a>
+          <a href="#" className="hover:text-white">
+            Help
+          </a>
+          <a href="#" className="hover:text-white">
+            Careers
+          </a>
         </nav>
         <div className="flex justify-center gap-6 mt-6">
           <Youtube />
