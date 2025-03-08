@@ -19,10 +19,10 @@ export default function Features() {
     <section className="py-20">
       <div className="container mx-auto">
         <div className="max-w-[540px] mx-auto">
-          <h2 className="text-center text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-5">
+          <h2 className="text-center text-[48px] md:leading-[60px] font-bold tracking-tighter text-[#1F2937] mt-5">
             Our features
           </h2>
-          <p className="text-center text-[22px] leading-[30px] tracking-tight text-[#010D3E] mt-5">
+          <p className="text-center text-[18px] leading-[30px] tracking-tight text-[#010D3E] mt-5">
             Pay everywhere using our service for a hassle-free experience
           </p>
         </div>
