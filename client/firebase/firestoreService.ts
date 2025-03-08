@@ -5,11 +5,12 @@ import { FIREBASE_APP } from './clientApp';
 const db = getFirestore(FIREBASE_APP);
 
 // Create a new user document or initialize with default metrics
-export const createUser = async (userId: string, firstName: string, lastName: string, email: string) => {
+export const createUser = async (userId: string, firstName: string, lastName: string, email: string, phoneNumber: string) => {
     try {
         await setDoc(doc(db, "users", userId), {
             firstName,
             lastName,
+            phoneNumber,
             email,
             faceUniqueId: "",
             linkedBankAccounts: [],
