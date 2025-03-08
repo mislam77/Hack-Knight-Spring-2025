@@ -12,7 +12,7 @@ export default function Footer() {
             src={InvisLogoTransparent}
             alt="Invis logo"
             height={60}
-            className="w-auto"
+            className="w-auto logo-color"
           />
         </div>
         <nav className="flex flex-row gap-6 mt-6 justify-center text-[14px]">
