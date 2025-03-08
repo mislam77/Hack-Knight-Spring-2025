@@ -7,6 +7,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import Loading from "../assets/loading.gif";
+import Webcam from "react-webcam";
 
 const FaceAuthSignupPage = () => {
   const [isReady, setIsReady] = useState(false);
@@ -53,6 +54,11 @@ const FaceAuthSignupPage = () => {
               Position your face for the camera and press the ready button when
               ready.
             </p>
+            <Webcam
+              audio={false}
+              screenshotFormat="image/jpeg"
+              className="w-full rounded-md"
+            />
             <button
               onClick={handleReady}
               className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
