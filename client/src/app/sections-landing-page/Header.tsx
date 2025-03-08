@@ -35,20 +35,23 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="py-5">
+      <div className="py-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex justify-between">
             <Image
               src={InvisLogo}
               alt="Invis.io logo"
-              height={20}
+              height={28}
+              width={80}
               className="w-auto"
             />
-            <nav className="flex gap-4 items-center">
+            <nav className="flex gap-8 font-medium items-center text-lg">
               <a href="#">About</a>
               <a href="#">Features</a>
               <a href="#">Updates</a>
-              <Button>Sign in</Button>
+              <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer bg-[#1895ff]">
+                Sign in
+              </Button>
             </nav>
           </div>
         </div>
