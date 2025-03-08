@@ -1,6 +1,6 @@
 import { DataCharts } from '@/components/data-charts';
 import { DataGrid } from '@/components/data-grid';
-import { Filters } from '@/components/filters';
+
 import React from 'react';
 
 export default function DashboardPage() {

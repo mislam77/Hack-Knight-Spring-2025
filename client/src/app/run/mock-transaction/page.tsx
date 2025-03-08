@@ -7,7 +7,7 @@ const RunMockTransactions = () => {
   useEffect(() => {
     const runScript = async () => {
       try {
-        await createMockTransaction('users doc id here');
+        await createMockTransaction('user id');
         console.log('Mock transactions created successfully!');
       } catch (error) {
         console.error('Error creating mock transactions:', error);

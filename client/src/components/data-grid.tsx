@@ -1,60 +1,89 @@
 "use client"
 
-import { FaPiggyBank } from "react-icons/fa"
+import { FaPiggyBank, FaShoppingBag, FaUtensils } from "react-icons/fa"
 import { DataCard } from "./data-card"
 
+import { onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { FIREBASE_AUTH } from "../../firebase/clientApp";
+import { getUserTransactions } from "../../firebase/firestoreService";
+
+interface AuthUser {
+    uid: string | null;
+}
+
+interface Transaction {
+    amount: number;
+    currency: string;
+    category: string;
+    storeName: string;
+    items: Array<{ itemName: string; quantity: number; price: number }>;
+    createdAt: Date;
+}
 
 export const DataGrid = () => {
-    const data = [
-        {
-            userId: 'ehdka271319hd', // Replace with actual user ID
-            totalAmount: 69.98,
-            currency: 'USD',
-            storeName: 'Test Store 1',
-            // storeLocation: new GeoPoint(40.7128, -74.0060), // Example coordinates (NYC)
-            // deviceLocation: new GeoPoint(40.7129, -74.0059), // Slight variation for realism
-            items: [
-                { itemName: 'Product A', quantity: 2, price: 19.99 },
-                { itemName: 'Product B', quantity: 1, price: 49.99 },
-            ],
-            timestamp: new Date('2025-03-07'),
-        },
-        {
-            userId: 'ehdka271319hd', // Replace with actual user ID
-            totalAmount: 100.97,
-            currency: 'USD',
-            storeName: 'Test Store 2',
-            // storeLocation: new GeoPoint(40.7128, -74.0060), // Example coordinates (NYC)
-            // deviceLocation: new GeoPoint(40.7129, -74.0059), // Slight variation for realism
-            items: [
-                { itemName: 'Product A', quantity: 2, price: 19.99 },
-                { itemName: 'Product B', quantity: 1, price: 49.99 },
-                { itemName: 'Product C', quantity: 1, price: 30.99 },
-            ],
-            timestamp: new Date('2025-03-06'),
-        },
-        {
-            userId: 'ehdka271319hd', // Replace with actual user ID
-            totalAmount: 50.98,
-            currency: 'USD',
-            storeName: 'Test Store 3',
-            // storeLocation: new GeoPoint(40.7128, -74.0060), // Example coordinates (NYC)
-            // deviceLocation: new GeoPoint(40.7129, -74.0059), // Slight variation for realism
-            items: [
-                { itemName: 'Product A', quantity: 1, price: 19.99 },
-                { itemName: 'Product B', quantity: 1, price: 30.99 },
-            ],
-            timestamp: new Date('2025-03-04'),
-        }
-    ];
+    const [authUser, setAuthUser] = useState<AuthUser>({ uid: null });
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
+            if (user) {
+                setAuthUser({ uid: user.uid });
+                try {
+                    const userTransactions = await getUserTransactions(user.uid);
+                    // Convert Firestore timestamps to Date objects
+                    const formattedTransactions = userTransactions.map((transaction: any) => ({
+                        ...transaction,
+                        createdAt: transaction.createdAt instanceof Date 
+                            ? transaction.createdAt 
+                            : transaction.createdAt?.toDate?.() || new Date(transaction.createdAt)
+                    }));
+                    setTransactions(formattedTransactions);
+                } catch (error) {
+                    console.error("Error fetching transactions:", error);
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                setAuthUser({ uid: null });
+                setTransactions([]);
+                setLoading(false);
+            }
+        });
+        
+        return () => unsubscribe();
+    }, []);
 
     // Calculate total spending
-    const totalSpending = data.reduce((sum, transaction) => sum + transaction.totalAmount, 0);
+    const totalSpending = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
+    
+    // Calculate spending by category
+    const categories = transactions.reduce<Record<string, number>>((acc, transaction) => {
+        const category = transaction.category || 'Uncategorized';
+        acc[category] = (acc[category] || 0) + transaction.amount;
+        return acc;
+    }, {});
+    
+    // Find top category
+    let topCategory = { name: 'None', amount: 0 };
+    Object.entries(categories).forEach(([name, amount]) => {
+        if (amount > topCategory.amount) {
+            topCategory = { name, amount };
+        }
+    });
     
     // Get date range
-    const dates = data.map(item => item.timestamp);
-    const oldestDate = new Date(Math.min(...dates.map(date => date.getTime())));
-    const newestDate = new Date(Math.max(...dates.map(date => date.getTime())));
+    const dates = transactions.map(item => item.createdAt);
+    
+    // Handle case when there are no transactions
+    const dateRangeText = dates.length > 0
+        ? `${new Date(Math.min(...dates.map(date => date.getTime()))).toLocaleDateString()} - ${new Date(Math.max(...dates.map(date => date.getTime()))).toLocaleDateString()}`
+        : "No transactions yet";
+
+    if (loading) {
+        return <div className="text-center py-10">Loading transactions...</div>;
+    }
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-2 mb-8">
@@ -63,10 +92,32 @@ export const DataGrid = () => {
                 value={totalSpending}
                 icon={FaPiggyBank}
                 variant="default"
-                date={`${oldestDate.toLocaleDateString()} - ${newestDate.toLocaleDateString()}`}
+                date={dateRangeText}
             />
+            
+            {transactions.length > 0 && (
+                <DataCard 
+                    title={`Top Category: ${topCategory.name}`}
+                    value={topCategory.amount}
+                    icon={topCategory.name === 'Food' ? FaUtensils : FaShoppingBag}
+                    variant="success"
+                    date={dateRangeText}
+                />
+            )}
+        
+            
+            {!authUser.uid && (
+                <div className="col-span-full text-center text-gray-500">
+                    Please sign in to view your transactions
+                </div>
+            )}
+            {authUser.uid && transactions.length === 0 && (
+                <div className="col-span-full text-center text-gray-500">
+                    No transactions found
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 
