@@ -35,7 +35,7 @@ import { Focus, IdCard, Trash2 } from "lucide-react";
 const SimulationPage: React.FC = () => {
   const [cardNumber, setCardNumber] = React.useState("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: { target: { value: string } }) => {
     let value = e.target.value.replace(/\D/g, "").slice(0, 16);
     value = value.replace(/(\d{4})(?=\d)/g, "$1 ");
     setCardNumber(value);
@@ -257,7 +257,9 @@ const SimulationPage: React.FC = () => {
                     Coupon
                   </Label>
                   <Input id="coupon" placeholder="Coupon code" />
-                  <Button variant="outline">Apply</Button>
+                  <Button variant="outline" className="hover:cursor-pointer">
+                    Apply
+                  </Button>
                 </div>
                 <Button className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white btn-color hover:cursor-pointer">
                   Confirm Payment

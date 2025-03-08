@@ -21,8 +21,8 @@ export default function Hero() {
             </p>
             <div className="flex gap-3 items-center mt-8">
               <Link href="/signup">
-                <Button className="px-8 py-6 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-[#1895ff] hover:cursor-pointer hover:bg-[#41a5fa]">
-                  Join Now
+                <Button className="px-8 py-6 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight hover:cursor-pointer btn-color ">
+                  Get started
                 </Button>
               </Link>
               <Button className="px-8 py-6 gap-1 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-transparent text-black hover:bg-transparent hover:cursor-pointer hover:text-[#41a5fa] shadow-none">

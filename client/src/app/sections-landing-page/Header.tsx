@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import InvisLogo from "@/app/assets/invis-logo.png";
+import InvisLogo from "@/app/assets/invis-Image.png";
+import InvisLogoTransparent from "@/app/assets/invisio-logo-transparent.png";
+import InvistLogoText from "@/app/assets/invisio-text-transparent.png";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, X } from "lucide-react";
 import { twMerge } from "tailwind-merge";
@@ -48,16 +50,24 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="pt-7 pb-5">
+      <div className="pt-6 pb-5">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex justify-between">
-            <Image
-              src={InvisLogo}
-              alt="Invis.io logo"
-              height={28}
-              width={80}
-              className="w-auto"
-            />
+            <div className="max-w-[300px] relative hover:cursor-pointer">
+              <a href="#" className="w-full">
+                <Image
+                  src={InvisLogoTransparent}
+                  alt="Invis.io logo"
+                  width={70}
+                  className="h-auto"
+                />
+                <Image
+                  src={InvistLogoText}
+                  alt="Invis.io text"
+                  className="w-full h-auto absolute -right-15 bottom-5"
+                />
+              </a>
+            </div>
             <nav className="flex gap-8 font-medium items-center text-lg">
               <a href="#" className="hover:text-[#41a5fa]">
                 About
@@ -69,7 +79,7 @@ export default function Header() {
                 Updates
               </a>
               <Link href="/login">
-                <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer bg-[#1895ff] hover:bg-[#41a5fa]">
+                <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer btn-color">
                   Sign in
                 </Button>
               </Link>

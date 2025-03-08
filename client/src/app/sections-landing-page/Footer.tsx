@@ -1,16 +1,21 @@
 import React from "react";
-import InvisLogo from "@/app/assets/invisio-logo.png";
+import InvisLogoTransparent from "@/app/assets/invisio-logo-transparent.png";
 import Image from "next/image";
 import { Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-black py-8 text-center text-white/65">
+    <footer className="bg-gray-700 py-8 text-center text-white/65">
       <div className="max-w-[428px] mx-auto">
         <div className="flex justify-center">
-          <Image src={InvisLogo} alt="Invis logo" height={80} className="" />
+          <Image
+            src={InvisLogoTransparent}
+            alt="Invis logo"
+            height={60}
+            className="w-auto"
+          />
         </div>
-        <nav className="flex flex-row gap-6 mt-6 justify-center">
+        <nav className="flex flex-row gap-6 mt-6 justify-center text-[14px]">
           <a href="#" className="hover:text-white">
             About
           </a>
@@ -30,7 +35,7 @@ export default function Footer() {
           <Twitter />
           <Linkedin />
         </div>
-        <p className="mt-8 text-sm">
+        <p className="mt-8 text-sm text-[12px]">
           &copy; 2025 Dummy Dum Dums, Inc. All rights reserved.
         </p>
       </div>
