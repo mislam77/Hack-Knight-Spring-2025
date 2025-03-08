@@ -1,4 +1,4 @@
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, query, collection, where, getDocs, addDoc } from "firebase/firestore";
 import { FIREBASE_APP } from './clientApp';
 
 // Firestore instance
@@ -21,6 +21,19 @@ export const createUser = async (userId: string, firstName: string, lastName: st
         console.log("User document successfully written!");
     } catch (error) {
         console.error("Error writing user document:", error);
+        throw error;
+    }
+};
+
+// Get transactions for a user
+export const getUserTransactions = async (userId: string) => {
+    try {
+        const q = query(collection(db, "transactions"), where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+        const transactions = querySnapshot.docs.map(doc => doc.data());
+        return transactions;
+    } catch (error) {
+        console.error("Error getting transactions:", error);
         throw error;
     }
 };

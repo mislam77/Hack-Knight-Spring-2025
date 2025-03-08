@@ -1,11 +1,14 @@
+import { DataCharts } from '@/components/data-charts';
+import { DataGrid } from '@/components/data-grid';
+
 import React from 'react';
 
-const DataDashboardPage: React.FC = () => {
-    return (
-        <div>
-            <h1>Data Dashboard Page</h1>
-        </div>
-    );
-};
-
-export default DataDashboardPage;
+export default function DashboardPage() {
+    return(
+      <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
+        <h1 className="text-2xl font-bold mb-6">Spending Dashboard</h1>
+        <DataGrid />
+        <DataCharts />
+      </div>
+    )
+}
