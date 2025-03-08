@@ -19,6 +19,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative">
+      <head>
+        <link rel="icon" href="/invis-logo-transparent.ico" sizes="any" />
+        <link
+          rel="icon"
+          href="/icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />
+      </head>
       <body className={clsx(dmSans.className, "antialiased bg-white")}>
         {children}
       </body>
