@@ -30,7 +30,7 @@ export default function LoginPage() {
   };
 
   const handleFaceAuth = () => {
-    router.push('/face-auth-login');
+    router.push("/face-auth-login");
   };
 
   return (
@@ -43,7 +43,6 @@ export default function LoginPage() {
             className="object-contain mix-blend-multiply brightness-105 contrast-110 saturate-150"
             width={100}
             height={50}
-            priority
           />
         </div>
         <div>
