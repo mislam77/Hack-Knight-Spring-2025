@@ -68,9 +68,11 @@ export default function Header() {
               <a href="#" className="hover:text-[#41a5fa]">
                 Updates
               </a>
-              <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer bg-[#1895ff] hover:bg-[#41a5fa]">
-                <Link href="/login">Sign in</Link>
-              </Button>
+              <Link href="/login">
+                <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer bg-[#1895ff] hover:bg-[#41a5fa]">
+                  Sign in
+                </Button>
+              </Link>
             </nav>
           </div>
         </div>

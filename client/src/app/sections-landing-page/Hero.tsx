@@ -20,9 +20,11 @@ export default function Hero() {
               technology.
             </p>
             <div className="flex gap-3 items-center mt-8">
-              <Button className="px-8 py-6 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-[#1895ff] hover:cursor-pointer hover:bg-[#41a5fa]">
-                <Link href="/signup">Join Now</Link>
-              </Button>
+              <Link href="/signup">
+                <Button className="px-8 py-6 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-[#1895ff] hover:cursor-pointer hover:bg-[#41a5fa]">
+                  Join Now
+                </Button>
+              </Link>
               <Button className="px-8 py-6 gap-1 text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight bg-transparent text-black hover:bg-transparent hover:cursor-pointer hover:text-[#41a5fa] shadow-none">
                 <span className="">Learn more</span>
                 <ArrowRight className="h-5 w-5" />
