@@ -1,18 +1,30 @@
 import React from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 interface PaymentFormProps {
   cardNumber: string;
   handleInputChange: (e: { target: { value: string } }) => void;
 }
 
-const PaymentForm: React.FC<PaymentFormProps> = ({ cardNumber, handleInputChange }) => {
+const PaymentForm: React.FC<PaymentFormProps> = ({
+  cardNumber,
+  handleInputChange,
+}) => {
   return (
-    <Card className="">
-      <CardHeader>
+    <Card className="relative">
+      <CardHeader className="mt-2">
         <CardTitle className="text-lg">Payment Method</CardTitle>
         <CardDescription>
           <p className="mt-1">Select a payment method.</p>
@@ -58,6 +70,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ cardNumber, handleInputChange
           Confirm payment
         </Button>
       </CardFooter>
+      <div className="absolute left-5 top-2">
+        <Link href="/data-dashboard-page" className="hover:text-[#41a5fa]">
+          <div className="flex gap-1 items-center">
+            <ArrowLeft size={15} />
+            <span className="text-[14px]">Go to dashboard</span>
+          </div>
+        </Link>
+      </div>
     </Card>
   );
 };
