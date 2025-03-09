@@ -71,7 +71,7 @@ export const DateFilter = () => {
           disabled={false}
           size="sm"
           variant="outline"
-          className="lg:w-auto w-full h-9 rounded-lg px-3 font-normal bg-black/80 hover:bg-[#1F2937] hover:text-[#F3F4F6] border-none outline-none text-white transition"
+          className="lg:w-auto w-full h-9 rounded-lg px-3 font-normal bg-white text-black hover:bg-[#e4e4e4] hover:text-[#181818] border-none outline-none transition"
         >
           <span>
             {date?.from && date?.to
