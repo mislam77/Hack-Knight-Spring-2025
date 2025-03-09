@@ -118,6 +118,19 @@ function SelectItem({
   )
 }
 
+function SelectItemText({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ItemText>) {
+  return (
+    <SelectPrimitive.ItemText
+      data-slot="select-item-text"
+      className={cn("text-sm", className)}
+      {...props}
+    />
+  )
+}
+
 function SelectSeparator({
   className,
   ...props
@@ -172,6 +185,7 @@ export {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectItemText,
   SelectLabel,
   SelectScrollDownButton,
   SelectScrollUpButton,

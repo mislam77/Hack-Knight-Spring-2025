@@ -2,7 +2,6 @@
 
 import {
   GoogleMap,
-  LoadScript,
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
@@ -17,6 +16,12 @@ function Cards() {
   };
 
   const defaultCenter = { lat: 40.73692481817399, lng: -73.82031950399166 };
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <section className="py-5">
@@ -180,19 +185,13 @@ function Cards() {
               {/* Map area */}
               <div className="w-full h-full relative">
                 <div className="w-full h-full">
-                  <LoadScript
-                    googleMapsApiKey={
-                      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
-                    }
+                  <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    center={defaultCenter}
+                    zoom={14}
                   >
-                    <GoogleMap
-                      mapContainerStyle={mapContainerStyle}
-                      center={defaultCenter}
-                      zoom={14}
-                    >
-                      <Marker position={defaultCenter} />
-                    </GoogleMap>
-                  </LoadScript>
+                    <Marker position={defaultCenter} />
+                  </GoogleMap>
                 </div>
                 {/* <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <div className="bg-[#103f62] rounded-full p-1.5 text-white ">

@@ -3,38 +3,39 @@
 import React, { useState } from "react";
 import { FIREBASE_DB } from "../../../firebase/clientApp";
 import { collection, addDoc, GeoPoint } from "firebase/firestore";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import PaymentMethodSelection from "@/components/payment-method-selection";
+import OrderSummary from "@/components/order-summary";
+import PaymentForm from "@/components/payment-form";
+import FaceRecognitionDialog from "@/components/face-recognition-dialog";
 import {
   Select,
-  SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+  SelectItemText,
+  SelectItemIndicator,
 } from "@/components/ui/select";
+
 import { ArrowLeft, Focus, IdCard, Trash2 } from "lucide-react";
 import Link from "next/link";
 
+const storeLocations = {
+  "Queens College": { lat: 40.7365, lng: -73.8205 },
+  "City College": { lat: 40.8198, lng: -73.9496 },
+};
+
+
 const SimulationPage: React.FC = () => {
+  const [selectedStore, setSelectedStore] = useState("Queens College");
+  const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const orderSummary = [
     {
       amount: 3,
@@ -53,9 +54,11 @@ const SimulationPage: React.FC = () => {
     },
   ];
 
-  const [message, setMessage] = useState("");
+  const handlePayment = () => {
+    setIsModalOpen(true);
+  };
 
-  const handlePayment = async () => {
+  const handleFaceRecognitionSuccess = async () => {
     try {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const userLocation = {
@@ -63,7 +66,7 @@ const SimulationPage: React.FC = () => {
           lng: position.coords.longitude,
         };
 
-        const distance = getDistance(userLocation, storeLocation);
+        const distance = getDistance(userLocation, storeLocations[selectedStore]);
         const maxDistance = 0.1; // 100 meters
 
         if (distance <= maxDistance) {
@@ -72,8 +75,8 @@ const SimulationPage: React.FC = () => {
             storeId: "exampleStoreId",
             amount: 11.47,
             currency: "USD",
-            storeName: "McDonald's Times Square, NY",
-            storeLocation: new GeoPoint(storeLocation.lat, storeLocation.lng),
+            storeName: selectedStore,
+            storeLocation: new GeoPoint(storeLocations[selectedStore].lat, storeLocations[selectedStore].lng),
             userLocation: new GeoPoint(userLocation.lat, userLocation.lng),
             items: orderSummary,
             createdAt: new Date(),
@@ -81,9 +84,7 @@ const SimulationPage: React.FC = () => {
           });
           setMessage("Transaction successful!");
         } else {
-          setMessage(
-            "Transaction failed: You are not within the store premises."
-          );
+          setMessage("Transaction failed: You are not within the store premises.");
         }
       });
     } catch (error) {
@@ -129,7 +130,7 @@ const SimulationPage: React.FC = () => {
   const total = (subtotal + taxAmount).toFixed(2);
 
   return (
-    <section className="py-5 bg-gray-50 h-screen">
+    <section className="py-5 bg-gray-50 h-screen flex items-center justify-center">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex justify-between relative">
           <div className="w-[720px]">
@@ -257,77 +258,27 @@ const SimulationPage: React.FC = () => {
                 </Button>
               </CardFooter>
             </Card>
+          <Select onValueChange={setSelectedStore} value={selectedStore}>
+            <SelectTrigger className="w-full mb-4">
+              <SelectValue>{selectedStore}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Locations</SelectLabel>
+                <SelectItem value="Queens College">
+                  <SelectItemText>Queens College</SelectItemText>
+                </SelectItem>
+                <SelectItem value="City College">
+                  <SelectItemText>City College</SelectItemText>
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+            <PaymentForm cardNumber={cardNumber} handleInputChange={handleInputChange} />
+            <PaymentMethodSelection handlePayment={handlePayment} />
           </div>
           <div className="w-[380px]">
-            <Card className="">
-              <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-white px-3 rounded-lg w-full">
-                  <Table className="">
-                    <TableHeader>
-                      <TableRow className="border-none">
-                        <TableHead className="sr-only">Amount</TableHead>
-                        <TableHead className="sr-only">Item</TableHead>
-                        <TableHead className="sr-only">Cost</TableHead>
-                        <TableHead className="sr-only">Status</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody className="text-gray-600 text-[13px] rounded-lg">
-                      {orderSummary.map((order) => (
-                        <TableRow key={order.item} className="border-none">
-                          <TableCell className="font-medium">
-                            <span>x</span>
-                            {order.amount}
-                          </TableCell>
-                          <TableCell>{order.item}</TableCell>
-                          <TableCell>${order.cost}</TableCell>
-                          <TableCell>
-                            <Button className="bg-transparent hover:bg-transparent shadow-none hover:cursor-pointer">
-                              <Trash2
-                                strokeWidth={1.75}
-                                className="text-gray-600"
-                              />
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-                <div className="flex flex-col gap-3 mt-4">
-                  <div className="flex justify-between w-full text-[14px] text-gray-800">
-                    <p>Subtotal</p>
-                    <p>${subtotal}</p>
-                  </div>
-                  <div className="flex justify-between w-full text-[14px] text-gray-800">
-                    <p>Tax</p>
-                    <p>${taxAmount}</p>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <div className="flex justify-between w-full text-sm font-bold text-gray-800">
-                    <p>Order Total</p>
-                    <p>${total}</p>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex flex-col gap-4 -mt-2">
-                <div className="flex gap-3 w-full">
-                  <Label htmlFor="coupon" className="sr-only">
-                    Coupon
-                  </Label>
-                  <Input id="coupon" placeholder="Coupon code" />
-                  <Button variant="outline" className="hover:cursor-pointer">
-                    Apply
-                  </Button>
-                </div>
-                <Button className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white btn-color hover:cursor-pointer">
-                  Confirm payment
-                </Button>
-              </CardFooter>
-            </Card>
+            <OrderSummary orderSummary={orderSummary} subtotal={subtotal} taxAmount={taxAmount} total={total} />
           </div>
           <div className="absolute left-6 top-3">
             <Link href="/data-dashboard-page">
@@ -341,6 +292,12 @@ const SimulationPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <FaceRecognitionDialog
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onRecognized={handleFaceRecognitionSuccess}
+        storeLocation={storeLocations[selectedStore]}
+      />
     </section>
   );
 };

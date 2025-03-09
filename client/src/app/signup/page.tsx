@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // New state for confirm password
   const [firstName, setfirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,10 +21,16 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !phoneNumber || !email || !password) {
+    if (!firstName || !lastName || !phoneNumber || !email || !password || !confirmPassword) {
       alert("Please fill out all required fields.");
       return;
     }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
     const auth = getAuth();
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -159,8 +166,8 @@ const SignupPage = () => {
                   required
                   className="input-field"
                   placeholder="Confirm password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={confirmPassword} // Use confirmPassword state
+                  onChange={(e) => setConfirmPassword(e.target.value)} // Update confirmPassword state
                 />
               </div>
             </div>

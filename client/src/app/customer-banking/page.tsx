@@ -56,7 +56,7 @@ function Banking() {
                 <Link href="/data-dashboard-page">
                   <li className="flex items-center text-gray-700 hover:text-[#41a5fa] hover:cursor-pointer">
                     <User size={18} className="mr-1" />
-                    Profile
+                    User Dashboard
                   </li>
                 </Link>
 

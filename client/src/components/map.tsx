@@ -11,7 +11,7 @@ const mapContainerStyle = {
     height: "100%",
 };
 
-const defaultCenter = { lat: 40.7365, lng: -73.8203 }; // Rosenthal Library, Queens College in Flushing
+const defaultCenter = { lat: 40.739854, lng: -73.820106 }; // Queens College in Flushing
 
 type Transaction = {
     brand: string;
