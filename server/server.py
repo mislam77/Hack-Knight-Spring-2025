@@ -63,8 +63,9 @@ def recognize_face():
         if output:
             data = json.loads(output)
             user_id = data.get("user_id")
+            custom_token = data.get("custom_token")
             if user_id:
-                return jsonify({"message": "Face recognition completed", "user_id": user_id})
+                return jsonify({"message": "Face recognition completed", "user_id": user_id, "custom_token": custom_token})
             else:
                 return jsonify({"error": "No user recognized"}), 404
         else:

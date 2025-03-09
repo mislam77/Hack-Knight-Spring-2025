@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { FIREBASE_DB } from "../../../firebase/clientApp";
+import { FIREBASE_DB, FIREBASE_AUTH } from "../../../firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
+import { signInWithCustomToken } from "firebase/auth";
 import Image from "next/image";
 import Loading from "../assets/loading.gif";
 import Webcam from "react-webcam";
@@ -33,6 +34,9 @@ const FaceAuthLoginPage = () => {
       if (data.error) {
         setMessage("Face data not found.");
       } else {
+        // Sign in with custom token
+        await signInWithCustomToken(FIREBASE_AUTH, data.custom_token);
+
         const userDoc = await getDoc(doc(FIREBASE_DB, "users", data.user_id));
         if (userDoc.exists()) {
           const userData = userDoc.data();
@@ -40,7 +44,7 @@ const FaceAuthLoginPage = () => {
             `Welcome back, ${userData.firstName} ${userData.lastName}`
           );
           setTimeout(() => {
-            router.push("/");
+            router.push("/data-dashboard-page");
           }, 2000);
         } else {
           setMessage("Face data not found.");

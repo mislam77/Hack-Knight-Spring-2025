@@ -48,14 +48,18 @@ function Banking() {
 
               {/* Desktop navigation */}
               <ul className="hidden md:flex gap-8 font-medium items-center">
-                <li className="flex items-center text-gray-700 hover:text-[#41a5fa]">
-                  <HelpCircle size={18} className="mr-1" />
-                  <Link href="3">Need Help?</Link>
-                </li>
-                <li className="flex items-center text-gray-700 hover:text-[#41a5fa]">
-                  <User size={18} className="mr-1" />
-                  <Link href="/data-dashboard-page">Profile</Link>
-                </li>
+                <Link href="#">
+                  <li className="flex items-center text-gray-700 hover:text-[#41a5fa]">
+                    Need Help?
+                  </li>
+                </Link>
+                <Link href="/data-dashboard-page">
+                  <li className="flex items-center text-gray-700 hover:text-[#41a5fa] hover:cursor-pointer">
+                    <User size={18} className="mr-1" />
+                    Profile
+                  </li>
+                </Link>
+
                 <li className="relative group">
                   <button className="flex items-center text-gray-700 hover:text-[#41a5fa] hover:cursor-pointer">
                     Menu
@@ -96,13 +100,13 @@ function Banking() {
               <div className="md:hidden">
                 <div className="px-2 pt-2 pb-3 space-y-1 border-t">
                   <Link
-                    href="/help"
+                    href="#"
                     className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50"
                   >
                     Need Help?
                   </Link>
                   <Link
-                    href="/profile"
+                    href="/data-dashboard-page"
                     className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50"
                   >
                     Profile
@@ -116,25 +120,25 @@ function Banking() {
                   </button>
                   <div className="pl-4 border-l-2 border-gray-200">
                     <Link
-                      href="/accounts"
+                      href="#"
                       className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50"
                     >
                       Accounts
                     </Link>
                     <Link
-                      href="/transactions"
+                      href="#"
                       className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50"
                     >
                       Transactions
                     </Link>
                     <Link
-                      href="/settings"
+                      href="#"
                       className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50"
                     >
                       Settings
                     </Link>
                     <Link
-                      href="/logout"
+                      href="#"
                       className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50"
                     >
                       Logout
