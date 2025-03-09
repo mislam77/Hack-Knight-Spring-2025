@@ -6,6 +6,8 @@ import { SpendingPie } from "./spending-pie";
 import { onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "../../firebase/clientApp";
 import { getUserTransactions } from "../../firebase/firestoreService";
+import TransactionsTable from "../components/transactions-table";
+import MapComponent from "../components/map";
 
 export const DataCharts = () => {
     const [loading, setLoading] = useState(true);
@@ -146,14 +148,24 @@ export const DataCharts = () => {
         return <div className="py-10 text-center">No transactions found</div>;
     }
 
-    return ( 
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
-            <div className="col-span-1 lg:col-span-3 xl:col-span-4">
-                <Chart data={data.days} />
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-7xl mx-auto h-full">
+            <div className="flex flex-col space-y-6 h-full">
+                <div className="flex-1 flex items-stretch">
+                    <div className="w-full h-full"><Chart data={data.days} /></div>
+                </div>
+                <div className="flex-1 flex items-stretch">
+                    <div className="w-full h-full"><SpendingPie data={data.categories} /></div>
+                </div>
             </div>
-            <div className="col-span-1 lg:col-span-3 xl:col-span-4">
-                <SpendingPie data={data.categories} />
+            <div className="flex flex-col space-y-6 h-full">
+                <div className="flex-1 flex items-stretch">
+                    <div className="w-full h-full"><TransactionsTable transactions={transactions} /></div>
+                </div>
+                <div className="flex-1 flex items-stretch">
+                    <div className="w-full h-full"><MapComponent transactions={transactions} /></div>
+                </div>
             </div>
         </div>
-    );
+    );        
 }
