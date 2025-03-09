@@ -21,7 +21,6 @@
 ![Screenshot 2025-03-08 223840](https://github.com/user-attachments/assets/0c6a0d79-72be-4412-91cf-2e60d4203cb8)
 
 ### Facial Payment
-![image](https://github.com/user-attachments/assets/9694777f-a1ca-4e67-9201-eafeb6b391db)
 ![image](https://github.com/user-attachments/assets/72c83cea-61ed-4584-a9db-966d4c4003e7)
 
 ## Getting Started
