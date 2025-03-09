@@ -25,6 +25,22 @@ export const createUser = async (userId: string, firstName: string, lastName: st
     }
 };
 
+// Get a user document by userId
+export const getUser = async (userId: string) => {
+    try {
+        const userDoc = await getDoc(doc(db, "users", userId));
+        if (userDoc.exists()) {
+            return userDoc.data();
+        } else {
+            console.log("No such document!");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error getting user document:", error);
+        throw error;
+    }
+};
+
 // Get transactions for a user
 export const getUserTransactions = async (userId: string) => {
     try {
