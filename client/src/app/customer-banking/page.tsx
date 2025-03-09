@@ -47,7 +47,7 @@ function Banking() {
               </div>
 
               {/* Desktop navigation */}
-              <ul className="hidden md:flex gap-8 font-medium items-center">
+              <ul className="hidden md:flex gap-8 font-medium items-center text-[17.5px]">
                 <Link href="#">
                   <li className="flex items-center text-gray-700 hover:text-[#41a5fa]">
                     Need Help?
