@@ -35,14 +35,14 @@ function Cards() {
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-light">23,766.</span>
+                  <span className="text-5xl font-medium">23,766.</span>
                   <span className="text-xl ml-1">43</span>
                 </div>
                 <p className="text-sm uppercase mt-2">Amount to pay today</p>
               </div>
 
               <div className="mt-6">
-                <button className="banking-page-btn">See Account</button>
+                <button className="banking-page-btn">See account</button>
               </div>
             </div>
           </div>
@@ -60,14 +60,14 @@ function Cards() {
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-light">0.</span>
+                  <span className="text-5xl font-medium">0.</span>
                   <span className="text-xl ml-1">03</span>
                 </div>
                 <p className="text-sm uppercase mt-2">Available balance</p>
               </div>
 
               <div className="mt-6">
-                <button className="banking-page-btn">See Account</button>
+                <button className="banking-page-btn">See account</button>
               </div>
             </div>
           </div>
@@ -85,13 +85,13 @@ function Cards() {
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-light">0.</span>
+                  <span className="text-5xl font-medium">0.</span>
                   <span className="text-xl ml-1">00</span>
                 </div>
               </div>
 
               <div className="mt-6">
-                <button className="banking-page-btn">See Account</button>
+                <button className="banking-page-btn">See account</button>
               </div>
             </div>
           </div>

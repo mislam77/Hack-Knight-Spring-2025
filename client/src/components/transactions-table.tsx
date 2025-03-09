@@ -30,17 +30,23 @@ const TransactionsTable = () => {
       if (user) {
         try {
           const userTransactions = await getUserTransactions(user.uid);
-          const formattedTransactions = userTransactions.map((transaction: any) => ({
-            id: transaction.id,
-            brand: transaction.storeName,
-            date: transaction.createdAt.toDate().toLocaleDateString(),
-            purchasedDetail: transaction.items.map((item: any) => item.itemName).join(", "),
-            totalAmount: `$${transaction.amount.toFixed(2)}`,
-          }));
+          const formattedTransactions = userTransactions.map(
+            (transaction: any) => ({
+              id: transaction.id,
+              brand: transaction.storeName,
+              date: transaction.createdAt.toDate().toLocaleDateString(),
+              purchasedDetail: transaction.items
+                .map((item: any) => item.itemName)
+                .join(", "),
+              totalAmount: `$${transaction.amount.toFixed(2)}`,
+            })
+          );
 
           // Sort transactions by date and get the most recent 10
           const recentTransactions = formattedTransactions
-            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .sort(
+              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            )
             .slice(0, 10);
 
           setTransactions(recentTransactions);
@@ -63,7 +69,7 @@ const TransactionsTable = () => {
   }
 
   return (
-    <div className="bg-white px-3 rounded-lg shadow-lg mt-8">
+    <div className="bg-white px-3 rounded-lg shadow-lg mt-8 overflow-y-scroll">
       <Table className="">
         <TableHeader>
           <TableRow className="">
@@ -74,14 +80,14 @@ const TransactionsTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-        {transactions.map((transaction, index) => (
+          {transactions.map((transaction, index) => (
             <TableRow key={transaction.id || index}>
-            <TableCell className="font-medium">{transaction.brand}</TableCell>
-            <TableCell>{transaction.date}</TableCell>
-            <TableCell>{transaction.purchasedDetail}</TableCell>
-            <TableCell>{transaction.totalAmount}</TableCell>
+              <TableCell className="font-medium">{transaction.brand}</TableCell>
+              <TableCell>{transaction.date}</TableCell>
+              <TableCell>{transaction.purchasedDetail}</TableCell>
+              <TableCell>{transaction.totalAmount}</TableCell>
             </TableRow>
-        ))}
+          ))}
         </TableBody>
       </Table>
     </div>
