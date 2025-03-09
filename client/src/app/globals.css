@@ -262,6 +262,11 @@ body {
        bg-[#1895ff] hover:bg-[#41a5fa]
      */
   }
+
+  .banking-page-btn {
+    @apply border hover:cursor-pointer border-white text-white py-2 px-8 rounded-lg w-full md:w-auto md:float-right hover:bg-white hover:text-[#000] transition duration-300 mb-2;
+  }
+
   .input-field {
     @apply rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-[#1E40AF] focus:z-10 sm:text-sm;
   }
