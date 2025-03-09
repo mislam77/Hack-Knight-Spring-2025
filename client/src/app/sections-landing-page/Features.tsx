@@ -16,7 +16,7 @@ import {
 
 export default function Features() {
   return (
-    <section className="py-20">
+    <section id="features" className="py-20">
       <div className="container mx-auto">
         <div className="max-w-[540px] mx-auto">
           <h2 className="text-center text-[48px] md:leading-[60px] font-bold tracking-tighter text-[#1F2937] mt-5">

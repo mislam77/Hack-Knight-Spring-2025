@@ -26,18 +26,18 @@ export const Header = () => {
       <div className="max-w-[1200px] mx-auto relative">
         <div className="flex justify-between">
           <div className="max-w-[300px] relative hover:cursor-pointer">
-            <a href="#" className="w-full">
+            <Link href="#" className="w-full">
               <Image
                 src={InvisLogoTransparent}
                 alt="Invis.io logo"
                 width={70}
                 className="h-auto logo-color"
               />
-            </a>
+            </Link>
           </div>
-          <nav className="flex gap-8 font-medium items-center text-white">
+          <nav className="flex gap-8 font-medium items-center text-white text-[17.5px]">
             <Link href="/" className="hover:text-[#41a5fa]">
-              About Us
+              About us
             </Link>
             <Link href="/customer-banking" className="hover:text-[#41a5fa]">
               Manage
@@ -50,7 +50,7 @@ export const Header = () => {
               onClick={handleSignOut}
               className="hover:text-[#41a5fa]"
             >
-              Sign Out
+              Sign out
             </Link>
           </nav>
           <div className="absolute -bottom-25">

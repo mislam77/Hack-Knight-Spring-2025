@@ -149,7 +149,7 @@ const SimulationPage: React.FC = () => {
                       </svg> */}
                         <Focus strokeWidth={1.75} size={22} />
                       </span>
-                      Pay with invis.io
+                      Pay with Invis.io
                     </button>
                   </div>
                 </CardDescription>
@@ -191,7 +191,7 @@ const SimulationPage: React.FC = () => {
                   Cancel
                 </Button>
                 <Button className="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white btn-color hover:cursor-pointer">
-                  Confirm Payment
+                  Confirm payment
                 </Button>
               </CardFooter>
             </Card>
@@ -262,7 +262,7 @@ const SimulationPage: React.FC = () => {
                   </Button>
                 </div>
                 <Button className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white btn-color hover:cursor-pointer">
-                  Confirm Payment
+                  Confirm payment
                 </Button>
               </CardFooter>
             </Card>

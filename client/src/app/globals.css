@@ -248,6 +248,10 @@ body {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
   .logo-color {
     @apply brightness-105 contrast-110 saturate-150;
@@ -264,7 +268,7 @@ body {
   }
 
   .banking-page-btn {
-    @apply border hover:cursor-pointer border-white text-white py-2 px-4 rounded-lg w-full md:w-auto hover:bg-white hover:text-[#000] font-semibold transition duration-300 mb-2;
+    @apply border hover:cursor-pointer border-white text-white py-2 px-4 rounded-lg w-full md:w-auto hover:bg-white hover:text-[#000] font-semibold transition duration-300;
   }
 
   .input-field {

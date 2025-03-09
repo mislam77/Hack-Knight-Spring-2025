@@ -23,22 +23,22 @@ function Cards() {
       <div className="max-w-[1000px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
           {/* Auto Loan Card */}
-          <div className="rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-[#103f62] to-[#36a1fe] text-white">
+          <div className="rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-[#103f62] to-[#68b7fb] text-white">
             <div className="p-6">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-xl font-semibold">Auto Loan</h2>
-                  <p className="text-sm opacity-80">...1234</p>
+                  <p className="text-sm opacity-80">...2973</p>
                 </div>
               </div>
 
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-medium">23,766.</span>
+                  <span className="text-5xl font-medium">2,766.</span>
                   <span className="text-xl ml-1">43</span>
                 </div>
-                <p className="text-sm uppercase mt-2">Amount to pay today</p>
+                <p className="text-sm mt-2">Amount to pay today</p>
               </div>
 
               <div className="mt-6">
@@ -48,22 +48,22 @@ function Cards() {
           </div>
 
           {/* 360 Checking Card */}
-          <div className="rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-[#103f62] to-[#36a1fe] text-white">
+          <div className="rounded-lg overflow-hidden shadow-md bg-gradient-to-t from-[#103f62] to-[#68b7fb] text-white">
             <div className="p-6">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-xl font-semibold">360 Checking</h2>
-                  <p className="text-sm opacity-80">...1234</p>
+                  <p className="text-sm opacity-80">...9452</p>
                 </div>
               </div>
 
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-medium">0.</span>
+                  <span className="text-5xl font-medium">90.</span>
                   <span className="text-xl ml-1">03</span>
                 </div>
-                <p className="text-sm uppercase mt-2">Available balance</p>
+                <p className="text-sm mt-2">Available balance</p>
               </div>
 
               <div className="mt-6">
@@ -73,21 +73,22 @@ function Cards() {
           </div>
 
           {/* Money Account Card */}
-          <div className="rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-[#103f62] to-[#36a1fe] text-white">
+          <div className="rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-[#103f62] to-[#68b7fb] text-white">
             <div className="p-6">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-xl font-semibold">Savings</h2>
-                  <p className="text-sm opacity-80">...1234</p>
+                  <p className="text-sm opacity-80">...7856</p>
                 </div>
               </div>
 
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-medium">0.</span>
+                  <span className="text-5xl font-medium">700.</span>
                   <span className="text-xl ml-1">00</span>
                 </div>
+                <p className="text-sm mt-2">Available balance</p>
               </div>
 
               <div className="mt-6">
