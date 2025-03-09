@@ -28,7 +28,7 @@ export default function LoginPage() {
       );
       const user = userCredential.user;
       console.log("Login successful:", { email, userId: user.uid });
-      router.push("/");
+      router.push("/data-dashboard-page");
     } catch (error) {
       console.error("Error during login:", error);
     }
