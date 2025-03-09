@@ -1,6 +1,23 @@
+"use client";
+
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  useLoadScript,
+} from "@react-google-maps/api";
+import Image from "next/image";
 import React from "react";
+import holdingCard from "@/app/assets/card-holding-transparent.png";
 
 function Cards() {
+  const mapContainerStyle = {
+    width: "100%",
+    height: "100%",
+  };
+
+  const defaultCenter = { lat: 40.73692481817399, lng: -73.82031950399166 };
+
   return (
     <section className="py-5">
       <div className="max-w-[1000px] mx-auto">
@@ -18,7 +35,7 @@ function Cards() {
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-light">23,766</span>
+                  <span className="text-5xl font-light">23,766.</span>
                   <span className="text-xl ml-1">43</span>
                 </div>
                 <p className="text-sm uppercase mt-2">Amount to pay today</p>
@@ -43,7 +60,8 @@ function Cards() {
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-light">0.03</span>
+                  <span className="text-5xl font-light">0.</span>
+                  <span className="text-xl ml-1">03</span>
                 </div>
                 <p className="text-sm uppercase mt-2">Available balance</p>
               </div>
@@ -67,7 +85,7 @@ function Cards() {
               <div className="mb-4">
                 <div className="flex items-baseline">
                   <span className="text-2xl">$</span>
-                  <span className="text-5xl font-light">0</span>
+                  <span className="text-5xl font-light">0.</span>
                   <span className="text-xl ml-1">00</span>
                 </div>
               </div>
@@ -81,18 +99,20 @@ function Cards() {
           {/* Explore Other Products Card */}
           <div className="rounded-lg overflow-hidden shadow-sm border border-gray-200 bg-gray-50">
             <div className="p-6">
-              <div className="mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">
-                  Explore other products
-                </h2>
-                <p className="text-gray-600 mt-2">
-                  Explore all our products to find an account perfect for you.
-                </p>
+              <div className="mx-auto -mt-3">
+                <Image
+                  src={holdingCard}
+                  alt="Holding card"
+                  className="mx-auto w-[150px] h-auto"
+                />
               </div>
 
-              <div className="mt-6">
-                <button className="text-white py-2 px-8 rounded-md btn-color hover:cursor-pointer transition duration-300">
-                  Open an account
+              <div className="mt-3 flex gap-3 justify-center">
+                <button className="text-white py-2 px-4 rounded-lg btn-color hover:cursor-pointer transition duration-300">
+                  Add card
+                </button>
+                <button className="text-white py-2 px-4 rounded-lg btn-color hover:cursor-pointer transition duration-300">
+                  Remove card
                 </button>
               </div>
             </div>
@@ -155,11 +175,25 @@ function Cards() {
               <h2 className="text-xl font-bold">Branch / ATM Finder</h2>
             </div>
 
-            <div className="w-full h-40 bg-gray-100">
+            <div className="w-full h-40">
               {/* Map area */}
               <div className="w-full h-full relative">
-                <div className="absolute w-full h-full bg-yellow-100/30"></div>
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="w-full h-full">
+                  <LoadScript
+                    googleMapsApiKey={
+                      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string
+                    }
+                  >
+                    <GoogleMap
+                      mapContainerStyle={mapContainerStyle}
+                      center={defaultCenter}
+                      zoom={14}
+                    >
+                      <Marker position={defaultCenter} />
+                    </GoogleMap>
+                  </LoadScript>
+                </div>
+                {/* <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <div className="bg-[#103f62] rounded-full p-1.5 text-white ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -176,10 +210,10 @@ function Cards() {
                       />
                     </svg>
                   </div>
-                </div>
-                <div className="absolute bottom-4 left-4 font-medium text-gray-700">
+                </div> */}
+                {/* <div className="absolute bottom-4 left-4 font-medium text-gray-700">
                   Invis.io
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

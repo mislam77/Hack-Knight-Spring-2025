@@ -57,7 +57,7 @@ function Banking() {
                   <Link href="/transaction-page">Profile</Link>
                 </li>
                 <li className="relative group">
-                  <button className="flex items-center text-gray-700 hover:text-[#41a5fa]">
+                  <button className="flex items-center text-gray-700 hover:text-[#41a5fa] hover:cursor-pointer">
                     Menu
                     <ChevronDown size={16} className="ml-1" />
                   </button>
