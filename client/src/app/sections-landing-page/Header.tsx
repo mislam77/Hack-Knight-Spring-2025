@@ -68,7 +68,7 @@ export default function Header() {
                 />
               </a>
             </div>
-            <nav className="flex gap-8 font-medium items-center text-lg">
+            <nav className="flex gap-8 font-medium items-center">
               <a href="#" className="hover:text-[#41a5fa]">
                 About
               </a>
@@ -79,7 +79,7 @@ export default function Header() {
                 Updates
               </a>
               <Link href="/login">
-                <Button className="text-lg font-medium px-5 py-5 hover:cursor-pointer btn-color">
+                <Button className="font-medium px-5 py-4 hover:cursor-pointer btn-color">
                   Sign in
                 </Button>
               </Link>
