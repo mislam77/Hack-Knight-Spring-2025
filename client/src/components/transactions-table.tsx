@@ -69,11 +69,11 @@ const TransactionsTable = () => {
   }
 
   return (
-    <div className="bg-white px-3 rounded-lg shadow-lg mt-8 overflow-y-scroll">
+    <div className="shadow-lg bg-white px-3 rounded-lg w-full">
       <Table className="">
         <TableHeader>
-          <TableRow className="">
-            <TableHead className="w-[100px]">Brand</TableHead>
+          <TableRow className="text-[12px]">
+            <TableHead className="">Brand</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Purchased Detail</TableHead>
             <TableHead>Amount</TableHead>
@@ -81,11 +81,17 @@ const TransactionsTable = () => {
         </TableHeader>
         <TableBody>
           {transactions.map((transaction, index) => (
-            <TableRow key={transaction.id || index}>
-              <TableCell className="font-medium">{transaction.brand}</TableCell>
-              <TableCell>{transaction.date}</TableCell>
-              <TableCell>{transaction.purchasedDetail}</TableCell>
-              <TableCell>{transaction.totalAmount}</TableCell>
+            <TableRow key={transaction.id || index} className="text-[12px]">
+              <TableCell className="font-medium truncate">
+                {transaction.brand}
+              </TableCell>
+              <TableCell className="truncate">{transaction.date}</TableCell>
+              <TableCell className="truncate">
+                {transaction.purchasedDetail}
+              </TableCell>
+              <TableCell className="truncate">
+                {transaction.totalAmount}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

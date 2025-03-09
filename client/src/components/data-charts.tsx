@@ -219,7 +219,7 @@ export const DataCharts = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col space-y-6 h-full gap-16">
+      <div className="flex flex-col space-y-6 h-full">
         <div className="flex-1 flex items-stretch w-full h-full">
           <div className="">
             <TransactionsTable transactions={transactions} />
