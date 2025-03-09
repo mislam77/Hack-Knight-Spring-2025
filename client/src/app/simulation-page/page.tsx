@@ -19,17 +19,26 @@ import {
   SelectScrollUpButton,
   SelectScrollDownButton,
   SelectItemText,
-  SelectItemIndicator,
 } from "@/components/ui/select";
 
 import { ArrowLeft, Focus, IdCard, Trash2 } from "lucide-react";
 import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const storeLocations = {
   "Queens College": { lat: 40.7365, lng: -73.8205 },
   "City College": { lat: 40.8198, lng: -73.9496 },
 };
-
 
 const SimulationPage: React.FC = () => {
   const [selectedStore, setSelectedStore] = useState("Queens College");
@@ -66,7 +75,10 @@ const SimulationPage: React.FC = () => {
           lng: position.coords.longitude,
         };
 
-        const distance = getDistance(userLocation, storeLocations[selectedStore]);
+        const distance = getDistance(
+          userLocation,
+          storeLocations[selectedStore]
+        );
         const maxDistance = 0.1; // 100 meters
 
         if (distance <= maxDistance) {
@@ -76,7 +88,10 @@ const SimulationPage: React.FC = () => {
             amount: 11.47,
             currency: "USD",
             storeName: selectedStore,
-            storeLocation: new GeoPoint(storeLocations[selectedStore].lat, storeLocations[selectedStore].lng),
+            storeLocation: new GeoPoint(
+              storeLocations[selectedStore].lat,
+              storeLocations[selectedStore].lng
+            ),
             userLocation: new GeoPoint(userLocation.lat, userLocation.lng),
             items: orderSummary,
             createdAt: new Date(),
@@ -84,7 +99,9 @@ const SimulationPage: React.FC = () => {
           });
           setMessage("Transaction successful!");
         } else {
-          setMessage("Transaction failed: You are not within the store premises.");
+          setMessage(
+            "Transaction failed: You are not within the store premises."
+          );
         }
       });
     } catch (error) {
@@ -258,27 +275,35 @@ const SimulationPage: React.FC = () => {
                 </Button>
               </CardFooter>
             </Card>
-          <Select onValueChange={setSelectedStore} value={selectedStore}>
-            <SelectTrigger className="w-full mb-4">
-              <SelectValue>{selectedStore}</SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Locations</SelectLabel>
-                <SelectItem value="Queens College">
-                  <SelectItemText>Queens College</SelectItemText>
-                </SelectItem>
-                <SelectItem value="City College">
-                  <SelectItemText>City College</SelectItemText>
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-            <PaymentForm cardNumber={cardNumber} handleInputChange={handleInputChange} />
+            <Select onValueChange={setSelectedStore} value={selectedStore}>
+              <SelectTrigger className="w-full mb-4">
+                <SelectValue>{selectedStore}</SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Locations</SelectLabel>
+                  <SelectItem value="Queens College">
+                    <SelectItemText>Queens College</SelectItemText>
+                  </SelectItem>
+                  <SelectItem value="City College">
+                    <SelectItemText>City College</SelectItemText>
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <PaymentForm
+              cardNumber={cardNumber}
+              handleInputChange={handleInputChange}
+            />
             <PaymentMethodSelection handlePayment={handlePayment} />
           </div>
           <div className="w-[380px]">
-            <OrderSummary orderSummary={orderSummary} subtotal={subtotal} taxAmount={taxAmount} total={total} />
+            <OrderSummary
+              orderSummary={orderSummary}
+              subtotal={subtotal}
+              taxAmount={taxAmount}
+              total={total}
+            />
           </div>
           <div className="absolute left-6 top-3">
             <Link href="/data-dashboard-page">
