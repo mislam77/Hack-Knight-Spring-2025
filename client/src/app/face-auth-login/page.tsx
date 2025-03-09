@@ -65,7 +65,8 @@ const FaceAuthLoginPage = () => {
         {!isReady ? (
           <div className="space-y-4">
             <p className="text-center">
-              Position your face directly towards the camera and press the ready button when ready.
+              Position your face directly towards the camera and press the ready
+              button when ready.
             </p>
             <Webcam
               audio={false}
@@ -74,7 +75,7 @@ const FaceAuthLoginPage = () => {
             />
             <button
               onClick={handleReady}
-              className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full px-4 py-2 font-medium text-white rounded-lg btn-color hover:cursor-pointer"
             >
               Ready
             </button>
