@@ -7,7 +7,7 @@ import numpy as np
 import os
 import logging
 import firebase_admin
-from firebase_admin import credentials, storage, firestore
+from firebase_admin import credentials, storage, firestore, auth
 from settings import CAMERA, FACE_DETECTION, PATHS
 
 # Configure logging
@@ -20,6 +20,9 @@ firebase_admin.initialize_app(cred, {'storageBucket': 'cardless-pay-861d9.fireba
 
 # Initialize Firestore
 db = firestore.client()
+
+def create_custom_token(user_id: str) -> str:
+    return auth.create_custom_token(user_id).decode('utf-8')
 
 def download_trainer_file():
     bucket = storage.bucket()
@@ -92,7 +95,9 @@ if __name__ == "__main__":
                 break
         
         logger.info("Face recognition stopped")
-        print(json.dumps({"user_id": user_id}))  # Print the user_id as JSON
+        if user_id:
+            custom_token = create_custom_token(user_id)
+            print(json.dumps({"user_id": user_id, "custom_token": custom_token}))
         
     except Exception as e:
         logger.error(f"An error occurred: {e}")
