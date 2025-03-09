@@ -14,11 +14,10 @@ interface FaceRecognitionDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onRecognized: () => void;
+  storeLocation: { lat: number; lng: number };
 }
 
-const storeLocation = { lat: 40.739854, lng: -73.820106 };
-
-const FaceRecognitionDialog: React.FC<FaceRecognitionDialogProps> = ({ isOpen, onClose, onRecognized }) => {
+const FaceRecognitionDialog: React.FC<FaceRecognitionDialogProps> = ({ isOpen, onClose, onRecognized, storeLocation }) => {
   const [isReady, setIsReady] = useState(false);
   const [message, setMessage] = useState("Stay still while we recognize your face...");
   const [userData, setUserData] = useState<{ firstName: string; lastName: string; userId: string }>({ firstName: "", lastName: "", userId: "" });
