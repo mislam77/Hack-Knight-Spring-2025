@@ -31,7 +31,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Focus, IdCard, Trash2 } from "lucide-react";
+import { ArrowLeft, Focus, IdCard, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 const SimulationPage: React.FC = () => {
   const orderSummary = [
@@ -130,11 +131,11 @@ const SimulationPage: React.FC = () => {
   return (
     <section className="py-5 bg-gray-50 h-screen">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex justify-between">
+        <div className="flex justify-between relative">
           <div className="w-[720px]">
             <Card className="">
               <CardHeader>
-                <CardTitle className="text-lg">Payment Method</CardTitle>
+                <CardTitle className="text-lg pt-5">Payment Method</CardTitle>
                 <CardDescription>
                   <p className="mt-1">Select a payment method.</p>
                   <div className="flex gap-5 mt-6">
@@ -327,6 +328,16 @@ const SimulationPage: React.FC = () => {
                 </Button>
               </CardFooter>
             </Card>
+          </div>
+          <div className="absolute left-6 top-3">
+            <Link href="/data-dashboard-page">
+              <div className="flex items-center gap-1">
+                <ArrowLeft strokeWidth={2} size={22} />
+                <span className="w-full text-[17px] flex justify-center font-medium rounded-lg text-black bg-transparent hover:cursor-pointer">
+                  Go to profile
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
