@@ -225,7 +225,7 @@ export const DataCharts = () => {
             <TransactionsTable transactions={transactions} />
           </div>
         </div>
-        <div className="flex-1 flex items-stretch">
+        <div className="flex-1 flex items-stretch mt-10">
           <div className="w-full h-full">
             <MapComponent transactions={transactions} />
           </div>
