@@ -24,6 +24,22 @@
 ![image](https://github.com/user-attachments/assets/9694777f-a1ca-4e67-9201-eafeb6b391db)
 ![image](https://github.com/user-attachments/assets/72c83cea-61ed-4584-a9db-966d4c4003e7)
 
+## Getting Started
+### Client
+```
+cd client
+npm install --legacy-peer-deps
+npm run dev
+```
+### Server (for Windows)
+```
+cd server
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+flask --app server --debug run
+```
+
 ## Tech Stack
 - TypeScript
 - Python
