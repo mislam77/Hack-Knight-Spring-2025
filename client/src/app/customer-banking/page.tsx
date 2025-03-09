@@ -54,7 +54,7 @@ function Banking() {
                 </li>
                 <li className="flex items-center text-gray-700 hover:text-[#41a5fa]">
                   <User size={18} className="mr-1" />
-                  <Link href="/transaction-page">Profile</Link>
+                  <Link href="/data-dashboard-page">Profile</Link>
                 </li>
                 <li className="relative group">
                   <button className="flex items-center text-gray-700 hover:text-[#41a5fa] hover:cursor-pointer">
