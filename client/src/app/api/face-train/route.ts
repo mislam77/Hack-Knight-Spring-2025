@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
     try {
-        const response = await fetch('http://localhost:5000/train', {
+        const response = await fetch('https://8104-2603-7000-74f0-8bd0-100d-fa9f-e6e2-3471.ngrok-free.app/train', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
