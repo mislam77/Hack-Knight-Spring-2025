@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FIREBASE_STORAGE, FIREBASE_DB } from "../../../firebase/clientApp";
 import { ref, uploadBytes } from "firebase/storage";
@@ -9,7 +9,7 @@ import Image from "next/image";
 import Loading from "../assets/loading.gif";
 import Webcam from "react-webcam";
 
-const FaceAuthSignupPage = () => {
+const FaceAuthSignupContent = () => {
   const [isReady, setIsReady] = useState(false);
   const [userId, setUserId] = useState("");
   const router = useRouter();
@@ -79,6 +79,14 @@ const FaceAuthSignupPage = () => {
         )}
       </div>
     </div>
+  );
+};
+
+const FaceAuthSignupPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FaceAuthSignupContent />
+    </Suspense>
   );
 };
 

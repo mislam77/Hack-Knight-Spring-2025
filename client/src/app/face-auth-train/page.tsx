@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Loading from "../assets/loading.gif";
 
-const FaceAuthTrainPage = () => {
+const FaceAuthTrainContent = () => {
   const [isTraining, setIsTraining] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -59,6 +59,14 @@ const FaceAuthTrainPage = () => {
         )}
       </div>
     </div>
+  );
+};
+
+const FaceAuthTrainPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FaceAuthTrainContent />
+    </Suspense>
   );
 };
 

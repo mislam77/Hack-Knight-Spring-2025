@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { format, subDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { ChevronDown } from "lucide-react";
@@ -15,7 +15,7 @@ import {
 } from "./ui/popover";
 import { Button } from "./ui/button";
 
-export const DateFilter = () => {
+const DateFilterContent = () => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -115,5 +115,13 @@ export const DateFilter = () => {
         </div>
       </PopoverContent>
     </Popover>
+  );
+};
+
+export const DateFilter = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DateFilterContent />
+    </Suspense>
   );
 };
