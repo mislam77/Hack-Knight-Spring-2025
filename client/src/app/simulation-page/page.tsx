@@ -79,7 +79,7 @@ const SimulationPage: React.FC = () => {
           userLocation,
           storeLocations[selectedStore]
         );
-        const maxDistance = 0.1; // 100 meters
+        const maxDistance = 100; // 100 meters
 
         if (distance <= maxDistance) {
           await addDoc(collection(FIREBASE_DB, "transactions"), {
